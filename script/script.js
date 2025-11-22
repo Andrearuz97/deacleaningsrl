@@ -51,7 +51,7 @@ if (contactForm) {
     contactForm.reset();
   });
 }
-// Scroll morbido per i link della navbar
+// Scroll morbido con offset per la navbar sticky
 document.querySelectorAll('a[href^="#"]').forEach((link) => {
   link.addEventListener("click", (e) => {
     const targetId = link.getAttribute("href");
@@ -59,7 +59,27 @@ document.querySelectorAll('a[href^="#"]').forEach((link) => {
 
     if (targetEl) {
       e.preventDefault();
-      targetEl.scrollIntoView({ behavior: "smooth", block: "start" });
+
+      const header = document.querySelector(".header");
+      const headerHeight = header ? header.offsetHeight : 0;
+
+      const elementPosition = targetEl.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = elementPosition - headerHeight - 1; // -10 per un filo di aria
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
     }
   });
 });
+
+window.addEventListener("scroll", () => {
+  const header = document.querySelector(".header");
+  if (window.scrollY > 10) {
+    header.classList.add("scrolled");
+  } else {
+    header.classList.remove("scrolled");
+  }
+});
+
