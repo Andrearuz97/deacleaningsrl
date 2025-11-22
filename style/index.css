@@ -135,6 +135,13 @@ body {
 .hero {
   padding: 90px 0 70px;
 }
+.hero-kicker {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
 
 .hero-content {
   display: grid;
@@ -247,6 +254,11 @@ body {
 .btn-primary:hover {
   transform: translateY(-1px);
   box-shadow: var(--shadow-soft);
+}
+.form-note {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 6px;
 }
 
 .btn-outline {

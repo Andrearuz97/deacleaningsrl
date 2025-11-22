@@ -51,3 +51,15 @@ if (contactForm) {
     contactForm.reset();
   });
 }
+// Scroll morbido per i link della navbar
+document.querySelectorAll('a[href^="#"]').forEach((link) => {
+  link.addEventListener("click", (e) => {
+    const targetId = link.getAttribute("href");
+    const targetEl = document.querySelector(targetId);
+
+    if (targetEl) {
+      e.preventDefault();
+      targetEl.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  });
+});
