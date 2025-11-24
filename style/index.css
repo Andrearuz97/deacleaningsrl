@@ -633,7 +633,7 @@ body {
   }
 
   .hero-image {
-    order: -1;
+    order: 0;
   }
 
   .cards-grid {
