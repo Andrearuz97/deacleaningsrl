@@ -100,6 +100,12 @@ body {
   height: 64px;
 }
 
+/* margine per ancora con navbar sticky */
+section {
+  scroll-margin-top: 30px; /* regola se serve, 80px va bene con header di 64px */
+}
+
+
 .logo {
   display: flex;
   align-items: center;
@@ -655,6 +661,27 @@ body {
   font-size: 1.3rem;
   color: var(--primary);
   transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.footer-legal {
+  margin-top: 8px;
+  font-size: 0.85rem;
+  text-align: center;
+  opacity: 0.8;
+}
+
+.footer-legal a {
+  color: #ffffff;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.footer-legal a:hover {
+  opacity: 1;
+}
+
+.footer-legal .separator {
+  margin: 0 8px;
 }
 
 .footer-social-icons a:hover {

@@ -44,7 +44,7 @@ if (yearSpan) {
 }
 
 // Scroll morbido con offset per la navbar sticky
-document.querySelectorAll('a[href^="#"]').forEach((link) => {
+/*document.querySelectorAll('a[href^="#"]').forEach((link) => {
   link.addEventListener("click", (e) => {
     const targetId = link.getAttribute("href");
     const targetEl = document.querySelector(targetId);
@@ -66,7 +66,7 @@ document.querySelectorAll('a[href^="#"]').forEach((link) => {
     }
   });
 });
-
+*/
 // Effetto navbar on scroll
 window.addEventListener("scroll", () => {
   const header = document.querySelector(".header");
