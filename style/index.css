@@ -166,6 +166,24 @@ section {
   transform: translateY(-1px);
 }
 
+/* Link attivo in navbar (sezione corrente) */
+.nav-links a.active {
+  color: var(--primary);
+  position: relative;
+}
+
+.nav-links a.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--primary-dark), var(--primary));
+}
+
+
 /* LANGUAGE SWITCH */
 .nav-lang {
   display: flex;

@@ -79,6 +79,37 @@ if ("IntersectionObserver" in window && animatedEls.length > 0) {
   animatedEls.forEach((el) => el.classList.add("is-visible"));
 }
 
+// LINK NAVBAR ATTIVO IN BASE ALLA SEZIONE
+const sections = document.querySelectorAll("section[id]");
+const navLinksAnchors = document.querySelectorAll(".nav-links a[href^='#']");
+
+if ("IntersectionObserver" in window && sections.length && navLinksAnchors.length) {
+  const sectionObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+
+        const id = entry.target.id;
+        navLinksAnchors.forEach((link) => {
+          const href = link.getAttribute("href");
+          if (href === `#${id}`) {
+            link.classList.add("active");
+          } else {
+            link.classList.remove("active");
+          }
+        });
+      });
+    },
+    {
+      /* zona “attiva” intorno al centro viewport */
+      root: null,
+      threshold: 0.4,
+    }
+  );
+
+  sections.forEach((section) => sectionObserver.observe(section));
+}
+
 // BOTTONE TORNA SU
 const backToTop = document.getElementById("back-to-top");
 if (backToTop) {
