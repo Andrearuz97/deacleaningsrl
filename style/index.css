@@ -142,9 +142,12 @@ section {
 }
 
 .logo-text {
-  letter-spacing: 0.02em;
-  color: var(--text);
+  font-family: "Playfair Display", serif;
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: 0.01em;
 }
+
 
 /* Nav links */
 .nav-links {
