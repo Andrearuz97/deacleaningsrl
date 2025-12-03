@@ -1,4 +1,6 @@
-// Navbar mobile toggle
+// ===========================
+// NAVBAR MOBILE TOGGLE
+// ===========================
 const navToggle = document.querySelector(".nav-toggle");
 const navLinks = document.querySelector(".nav-links");
 
@@ -26,7 +28,22 @@ if (navToggle && navLinks) {
 
   // Chiudi il menu quando clicchi su un link
   navLinks.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", closeMenu);
+    link.addEventListener("click", () => {
+      closeMenu();
+    });
+  });
+
+  // CHIUSURA MENU CLICCANDO FUORI
+  document.addEventListener("click", (e) => {
+    const isMenuOpen = navLinks.classList.contains("show");
+    if (!isMenuOpen) return;
+
+    const clickedInsideMenu = navLinks.contains(e.target);
+    const clickedToggle = navToggle.contains(e.target);
+
+    if (!clickedInsideMenu && !clickedToggle) {
+      closeMenu();
+    }
   });
 
   // Chiudi con ESC
@@ -37,7 +54,9 @@ if (navToggle && navLinks) {
   });
 }
 
-// Effetto navbar on scroll (glow oro come il footer)
+// ===========================
+// NAVBAR SCROLL EFFECT
+// ===========================
 window.addEventListener("scroll", () => {
   const header = document.querySelector(".header");
   if (!header) return;
@@ -49,13 +68,17 @@ window.addEventListener("scroll", () => {
   }
 });
 
-// Anno nel footer
+// ===========================
+// FOOTER YEAR
+// ===========================
 const yearSpan = document.getElementById("year");
 if (yearSpan) {
   yearSpan.textContent = new Date().getFullYear();
 }
 
-// ANIMAZIONI SU SCROLL (IntersectionObserver)
+// ===========================
+// ANIMAZIONI SU SCROLL
+// ===========================
 const animatedEls = document.querySelectorAll("[data-animate]");
 
 if ("IntersectionObserver" in window && animatedEls.length > 0) {
@@ -75,25 +98,23 @@ if ("IntersectionObserver" in window && animatedEls.length > 0) {
 
   animatedEls.forEach((el) => observer.observe(el));
 } else {
-  // fallback: se il browser non supporta IntersectionObserver
   animatedEls.forEach((el) => el.classList.add("is-visible"));
 }
 
-// LINK NAVBAR ATTIVO IN BASE ALLA SEZIONE
+// ===========================
+// LINK NAVBAR ATTIVO
+// ===========================
 const sections = document.querySelectorAll("section[id]");
 const navLinksAnchors = document.querySelectorAll(".nav-links a[href^='#']");
 
-if (
-  "IntersectionObserver" in window &&
-  sections.length &&
-  navLinksAnchors.length
-) {
+if ("IntersectionObserver" in window && sections.length && navLinksAnchors.length) {
   const sectionObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
 
         const id = entry.target.id;
+
         navLinksAnchors.forEach((link) => {
           const href = link.getAttribute("href");
           if (href === `#${id}`) {
@@ -105,7 +126,6 @@ if (
       });
     },
     {
-      /* zona “attiva” intorno al centro viewport */
       root: null,
       threshold: 0.4,
     }
@@ -114,7 +134,9 @@ if (
   sections.forEach((section) => sectionObserver.observe(section));
 }
 
+// ===========================
 // BOTTONE TORNA SU
+// ===========================
 const backToTop = document.getElementById("back-to-top");
 if (backToTop) {
   window.addEventListener("scroll", () => {
@@ -125,15 +147,19 @@ if (backToTop) {
     }
   });
 
-  backToTop.addEventListener("click", () => {
+  backToTop.addEventListener("click", (e) => {
+    e.preventDefault();
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
+    backToTop.blur();
   });
 }
 
+// ===========================
 // COOKIE BANNER
+// ===========================
 const cookieBanner = document.getElementById("cookie-banner");
 const cookieAccept = document.getElementById("cookie-accept");
 
@@ -149,6 +175,7 @@ if (cookieBanner && cookieAccept) {
     cookieBanner.style.display = "none";
   });
 }
+
 // ===========================
 // CAROSELLO RECENSIONI
 // ===========================
@@ -217,7 +244,7 @@ if (cookieBanner && cookieAccept) {
     startAutoplay(); // reset autoplay dopo interazione
   }
 
-  // Eventi frecce
+  // Eventi frecce (bottoni)
   if (nextBtn) {
     nextBtn.addEventListener("click", () => userNavigate(goNext));
   }
@@ -233,15 +260,108 @@ if (cookieBanner && cookieAccept) {
     });
   });
 
-  // Pausa autoplay su hover (desktop) / long press mobile non ci interessa
+  // ===========================
+  // SWIPE TOUCH (MOBILE)
+  // ===========================
+  let touchStartX = 0;
+  let touchStartY = 0;
+  let isTouchSwiping = false;
+
+  carousel.addEventListener("touchstart", (e) => {
+    if (!e.touches || e.touches.length === 0) return;
+    const touch = e.touches[0];
+    touchStartX = touch.clientX;
+    touchStartY = touch.clientY;
+    isTouchSwiping = true;
+  });
+
+  carousel.addEventListener("touchmove", (e) => {
+    if (!isTouchSwiping || !e.touches || e.touches.length === 0) return;
+
+    const touch = e.touches[0];
+    const dx = touch.clientX - touchStartX;
+    const dy = touch.clientY - touchStartY;
+
+    // Swipe orizzontale netto
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+      e.preventDefault(); // blocca scroll verticale mentre swipi
+
+      if (dx < 0) {
+        userNavigate(goNext);
+      } else {
+        userNavigate(goPrev);
+      }
+
+      isTouchSwiping = false; // evita multiple slide
+    }
+  });
+
+  carousel.addEventListener("touchend", () => {
+    isTouchSwiping = false;
+  });
+
+  // ===========================
+  // DRAG CON MOUSE (DESKTOP)
+  // ===========================
+  let mouseStartX = 0;
+  let isDragging = false;
+  const DRAG_THRESHOLD = 40; // px minimi per cambiare slide
+
+  const onMouseDown = (e) => {
+    isDragging = true;
+    mouseStartX = e.clientX;
+    stopAutoplay();
+  };
+
+  const onMouseUp = (e) => {
+    if (!isDragging) return;
+    isDragging = false;
+    const diff = e.clientX - mouseStartX;
+
+    if (Math.abs(diff) > DRAG_THRESHOLD) {
+      if (diff > 0) goPrev();
+      else goNext();
+      startAutoplay();
+    } else {
+      // trascinato poco → solo riavvio autoplay
+      startAutoplay();
+    }
+  };
+
+  const onMouseLeave = () => {
+    isDragging = false;
+  };
+
+  track.addEventListener("mousedown", onMouseDown);
+  track.addEventListener("mouseup", onMouseUp);
+  track.addEventListener("mouseleave", onMouseLeave);
+
+  // ===========================
+  // FRECCE TASTIERA (MENTRE SEI SOPRA IL CAROSELLO)
+  // ===========================
+  const handleKeydown = (e) => {
+    if (e.key === "ArrowRight") {
+      e.preventDefault();
+      userNavigate(goNext);
+    } else if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      userNavigate(goPrev);
+    }
+  };
+
   carousel.addEventListener("mouseenter", () => {
+    // quando il mouse è sopra il carosello → attivo tasti freccia
+    window.addEventListener("keydown", handleKeydown);
     stopAutoplay();
   });
+
   carousel.addEventListener("mouseleave", () => {
+    window.removeEventListener("keydown", handleKeydown);
     startAutoplay();
   });
 
-  // Avvio
+  // Avvio iniziale
   updateSlide(0);
   startAutoplay();
 })();
+
