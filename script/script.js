@@ -177,17 +177,8 @@ if (backToTop) {
     }
   });
 
-  // Effetto tap/click visibile ovunque (anche Android)
-  const addTapEffect = () => {
-    backToTop.classList.add("tapped");
-    setTimeout(() => {
-      backToTop.classList.remove("tapped");
-    }, 150);
-  };
-
   backToTop.addEventListener("click", (e) => {
     e.preventDefault();
-    addTapEffect();
     window.scrollTo({
       top: 0,
       behavior: "smooth",
@@ -195,6 +186,7 @@ if (backToTop) {
     backToTop.blur();
   });
 }
+
 
 // ===========================
 // COOKIE BANNER
@@ -235,6 +227,7 @@ if (cookieBanner && cookieAccept) {
   const slideCount = originalSlides.length;
   let autoplayTimer = null;
   const AUTOPLAY_DELAY = 6000; // 6 secondi
+  let isAnimating = false;     // ⬅️ blocco durante animazione
 
   // ===========================
   // CLONI PER EFFETTO INFINITO
@@ -249,7 +242,6 @@ if (cookieBanner && cookieAccept) {
 
   const allSlides = Array.from(track.querySelectorAll(".review-card"));
 
-  // Indice corrente nei "tutti i slide" (allSlides)
   // 0 = lastClone, 1 = slide reale 0, 2 = slide reale 1, ..., slideCount = slide reale N-1, slideCount+1 = firstClone
   let currentIndex = 1; // partiamo dalla PRIMA slide reale
 
@@ -273,21 +265,17 @@ if (cookieBanner && cookieAccept) {
   // Aggiorna posizione carosello + pallini
   function setPosition(animated = true) {
     if (!animated) {
-      // disabilita momentaneamente la transition per "teletrasporti"
       track.style.transition = "none";
     }
 
-    const offset = -currentIndex * 100; // ogni slide = 100%
+    const offset = -currentIndex * 100;
     track.style.transform = `translateX(${offset}%)`;
 
     if (!animated) {
-      // forza reflow
-      void track.offsetWidth;
-      // rimetti la transition come da CSS
+      void track.offsetWidth;  // forza reflow
       track.style.transition = "";
     }
 
-    // indice reale per i pallini (0..slideCount-1)
     const realIndex = ((currentIndex - 1 + slideCount) % slideCount);
 
     dots.forEach((dot, i) => {
@@ -296,11 +284,15 @@ if (cookieBanner && cookieAccept) {
   }
 
   function goNext() {
+    if (isAnimating) return;
+    isAnimating = true;
     currentIndex += 1;
     setPosition(true);
   }
 
   function goPrev() {
+    if (isAnimating) return;
+    isAnimating = true;
     currentIndex -= 1;
     setPosition(true);
   }
@@ -319,24 +311,24 @@ if (cookieBanner && cookieAccept) {
 
   function userNavigate(fn) {
     fn();
-    startAutoplay(); // reset autoplay dopo interazione
+    startAutoplay();
   }
 
   // ===========================
   // GESTIONE "FINE / INIZIO" (WRAP)
   // ===========================
   track.addEventListener("transitionend", () => {
-    // Se siamo andati OLTRE l'ultima reale (sul clone della prima)
     if (currentIndex === slideCount + 1) {
-      currentIndex = 1; // torna alla PRIMA reale
-      setPosition(false); // senza animazione visibile
+      currentIndex = 1;
+      setPosition(false);
     }
 
-    // Se siamo andati PRIMA della prima reale (sul clone dell'ultima)
     if (currentIndex === 0) {
-      currentIndex = slideCount; // vai all'ULTIMA reale
-      setPosition(false); // senza animazione visibile
+      currentIndex = slideCount;
+      setPosition(false);
     }
+
+    isAnimating = false; // ⬅️ sblocca alla fine dell’animazione
   });
 
   // ===========================
@@ -354,11 +346,12 @@ if (cookieBanner && cookieAccept) {
   // ===========================
   dots.forEach((dot) => {
     dot.addEventListener("click", () => {
+      if (isAnimating) return;
+      isAnimating = true;
       const realIndex = Number(dot.dataset.index || "0");
-      userNavigate(() => {
-        currentIndex = realIndex + 1; // +1 perché 0 è il clone dell'ultima
-        setPosition(true);
-      });
+      currentIndex = realIndex + 1; // +1 perché 0 è il clone dell'ultima
+      setPosition(true);
+      startAutoplay();
     });
   });
 
@@ -463,4 +456,5 @@ if (cookieBanner && cookieAccept) {
   setPosition(false); // vai alla prima reale senza animazione
   startAutoplay();
 })();
+
 
