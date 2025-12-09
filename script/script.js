@@ -476,7 +476,7 @@ function attachPressedFeedback(selector) {
       if (pressedTimeout) clearTimeout(pressedTimeout);
       pressedTimeout = setTimeout(() => {
         el.classList.remove("is-pressed");
-      }, 200);
+      }, 300);
     };
 
     const removePressed = () => {
