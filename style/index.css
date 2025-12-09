@@ -59,8 +59,6 @@ body {
   }
 }
 
-
-
 #piva {
   -webkit-user-select: text;
   -moz-user-select: text;
@@ -723,19 +721,18 @@ section {
   }
 }
 
-/* 📱 Mobile: NIENTE hover appiccicato, solo feedback mentre tocchi */
+/* 📱 Touch: neutralizza eventuali hover “appiccicati” */
 @media (hover: none) and (pointer: coarse) {
-  /* disattivo qualunque hover “fantasma” */
   .footer-social-icons a:hover {
     opacity: 1;
     transform: none;
   }
+}
 
-  /* feedback solo mentre il dito è giù */
-  .footer-social-icons a:active {
-    opacity: 0.7;
-    transform: translateY(-2px);
-  }
+/* 🖐 Effetto click SEMPRE (desktop + mobile) */
+.footer-social-icons a:active {
+  opacity: 0.7;
+  transform: translateY(-2px);
 }
 
 .footer-legal {
@@ -1111,26 +1108,13 @@ section {
   }
 }
 
-/* 📱 Mobile: niente hover appiccicato, solo active */
-@media (hover: none) and (pointer: coarse) {
-
-  /* neutralizzo qualunque effetto hover strano */
-  .back-to-top:hover {
-    background: rgba(5, 6, 8, 0.96);
-    color: var(--primary);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8);
-    transform: translateY(0);
-  }
-
-  /* feedback mentre tieni premuto */
-  .back-to-top:active {
-    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
-    color: var(--bg);
-    box-shadow: 0 12px 32px rgba(212, 175, 55, 0.6);
-    transform: translateY(-1px);
-  }
+/* 🖐 Effetto click SEMPRE (desktop + mobile) */
+.back-to-top:active {
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+  color: var(--bg);
+  box-shadow: 0 12px 32px rgba(212, 175, 55, 0.6);
+  transform: translateY(-1px);
 }
-
 
 @media (max-width: 720px) {
   .back-to-top {
@@ -1138,8 +1122,6 @@ section {
     bottom: 88px;
   }
 }
-
-
 
 /* RECENSIONI - CAROSELLO */
 .reviews-carousel {
@@ -1183,7 +1165,6 @@ section {
   box-shadow: var(--shadow-soft);
   border-color: rgba(212, 175, 55, 0.25);
 }
-
 
 /* Frecce */
 .reviews-arrow {

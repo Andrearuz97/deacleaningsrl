@@ -165,53 +165,27 @@ if (
 }
 
 // ===========================
-// BOTTONE TORNA SU (DESKTOP + ANDROID)
+// BOTTONE TORNA SU
 // ===========================
 const backToTop = document.getElementById("back-to-top");
-
 if (backToTop) {
-  const toggleVisibility = () => {
+  window.addEventListener("scroll", () => {
     if (window.scrollY > 400) {
       backToTop.classList.add("show");
     } else {
       backToTop.classList.remove("show");
     }
-  };
+  });
 
-  // mostra/nasconde in base allo scroll
-  window.addEventListener("scroll", toggleVisibility);
-  // chiamata iniziale (es. se entri già scrollato)
-  toggleVisibility();
-
-  const goTop = (e) => {
-    if (e) e.preventDefault();
-
-    // scroll "standard"
+  backToTop.addEventListener("click", (e) => {
+    e.preventDefault();
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
-
-    // fallback per alcuni browser mobile strani
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
-
     backToTop.blur();
-  };
-
-  // desktop + la maggior parte dei browser mobile
-  backToTop.addEventListener("click", goTop);
-
-  // fallback esplicito per Android / touch
-  backToTop.addEventListener(
-    "touchend",
-    (e) => {
-      goTop(e);
-    },
-    { passive: false }
-  );
+  });
 }
-
 
 
 // ===========================
