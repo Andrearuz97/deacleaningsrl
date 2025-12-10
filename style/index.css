@@ -66,10 +66,26 @@ body {
   user-select: text;
 }
 
-/* margine per ancora con navbar sticky */
+/* margine per ancora con navbar sticky 
 section {
-  scroll-margin-top: 60px;
+  scroll-margin-top: 28px;
 }
+*/
+/* Offset giusto per scroll con header fisso (menu) */
+#home,
+#servizi,
+#come-lavoriamo,
+#chi-siamo,
+#contatti,
+#recensioni,
+#services,
+#how-we-work,
+#about-us,
+#contacts,
+#reviews  {
+  scroll-margin-top: 45px;  /* prova questo, poi se vuoi lo alzi/abbassi */
+}
+
 
 /* UTILITY */
 .container {

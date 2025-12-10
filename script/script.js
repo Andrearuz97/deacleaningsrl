@@ -128,40 +128,43 @@ if ("IntersectionObserver" in window && animatedEls.length > 0) {
 }
 
 // ===========================
-// LINK NAVBAR ATTIVO
+// LINK NAVBAR ATTIVO (versione con scroll, più precisa)
 // ===========================
 const sections = document.querySelectorAll("section[id]");
 const navLinksAnchors = document.querySelectorAll(".nav-links a[href^='#']");
 
-if (
-  "IntersectionObserver" in window &&
-  sections.length &&
-  navLinksAnchors.length
-) {
-  const sectionObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
+if (sections.length && navLinksAnchors.length) {
+  const HEADER_OFFSET = 90; // altezza header + margine di sicurezza
 
-        const id = entry.target.id;
+  const updateActiveNav = () => {
+    const scrollPos = window.scrollY + HEADER_OFFSET;
+    let currentId = null;
 
-        navLinksAnchors.forEach((link) => {
-          const href = link.getAttribute("href");
-          if (href === `#${id}`) {
-            link.classList.add("active");
-          } else {
-            link.classList.remove("active");
-          }
-        });
-      });
-    },
-    {
-      root: null,
-      threshold: 0.4,
-    }
-  );
+    sections.forEach((section) => {
+      const top = section.offsetTop;
+      const height = section.offsetHeight;
 
-  sections.forEach((section) => sectionObserver.observe(section));
+      if (scrollPos >= top && scrollPos < top + height) {
+        currentId = section.id;
+      }
+    });
+
+    if (!currentId) return;
+
+    navLinksAnchors.forEach((link) => {
+      const href = link.getAttribute("href");
+      if (href === `#${currentId}`) {
+        link.classList.add("active");
+      } else {
+        link.classList.remove("active");
+      }
+    });
+  };
+
+  // Aggiorna al load e allo scroll
+  window.addEventListener("scroll", updateActiveNav);
+  window.addEventListener("load", updateActiveNav);
+  updateActiveNav();
 }
 
 // ===========================
