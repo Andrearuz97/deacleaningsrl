@@ -551,14 +551,24 @@ function attachPressedFeedback(selector) {
   });
 }
 
-// ✅ Applico l'effetto a TUTTI i punti di interazione principali
-attachPressedFeedback(".footer-social-icons a"); // social footer
-attachPressedFeedback("#back-to-top");           // freccia su
-attachPressedFeedback(".whatsapp-float");        // bottone WhatsApp flottante
-attachPressedFeedback(".btn");                   // tutti i bottoni (Richiedi preventivo, Invia richiesta, ecc.)
-attachPressedFeedback(".nav-links a");           // link della navbar
-attachPressedFeedback(".contact-list a");        // telefono, email, indirizzo
-attachPressedFeedback(".logo");                  // logo in alto cliccabile
+// FEEDBACK CLICK / TAP PER TUTTI GLI ELEMENTI CLICCABILI
+attachPressedFeedback(".footer-social-icons a");  // social footer
+attachPressedFeedback("#back-to-top");            // freccia torna su
+attachPressedFeedback(".whatsapp-float");         // WhatsApp flottante
+
+// NAVBAR + LOGO
+attachPressedFeedback(".nav-links a");            // link menu
+attachPressedFeedback(".logo");                   // logo cliccabile
+
+// BOTTONI GENERICI
+attachPressedFeedback(".btn");                    // tutti i bottoni (hero, form, ecc.)
+
+// CONTATTI
+attachPressedFeedback(".contact-list a");         // tel, mail, maps
+
+// CAROSELLO RECENSIONI
+attachPressedFeedback(".reviews-arrow");          // frecce sx/dx
+attachPressedFeedback(".reviews-dot");            // pallini sotto
 
 
 

@@ -1312,9 +1312,16 @@ button,
 .nav-links a.is-pressed,
 .contact-list a.is-pressed,
 .btn.is-pressed,
-.footer-social-icons a.is-pressed {
+.footer-social-icons a.is-pressed,
+.reviews-arrow.is-pressed {
   opacity: 0.7;
   transform: translateY(-2px);
+}
+
+/* Pallini del carosello premuti: li facciamo solo un filo più piccoli */
+.reviews-dot.is-pressed {
+  transform: scale(0.9);
+  opacity: 0.8;
 }
 
 /* WhatsApp flottante premuto (tap/click) */
