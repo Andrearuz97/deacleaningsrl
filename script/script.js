@@ -460,7 +460,7 @@ if (cookieBanner && cookieAccept) {
   startAutoplay();
 })();
 // ===========================
-// FEEDBACK VISIVO CLICK (SOCIAL + FRECCIA) - ANDROID FRIENDLY
+// FEEDBACK VISIVO CLICK (TUTTO) - VERSIONE "BLINDATA"
 // ===========================
 function attachPressedFeedback(selector) {
   const elements = document.querySelectorAll(selector);
@@ -468,18 +468,17 @@ function attachPressedFeedback(selector) {
 
   elements.forEach((el) => {
     let pressedTimeout = null;
+    let lastTouchTime = 0;          // per distinguere tap da click "finto" dopo il touch
+    const TOUCH_DELAY = 600;        // ms
 
     const addPressed = () => {
-      // se per qualche motivo era rimasta, la tolgo prima
-      el.classList.remove("is-pressed");
-      // aggiungo lo stato premuto
       el.classList.add("is-pressed");
 
-      // sicurezza: la rimuovo comunque dopo 200ms
+      // sicurezza: la rimuovo comunque dopo un po'
       if (pressedTimeout) clearTimeout(pressedTimeout);
       pressedTimeout = setTimeout(() => {
         el.classList.remove("is-pressed");
-      }, 300);
+      }, 250);
     };
 
     const removePressed = () => {
@@ -487,35 +486,57 @@ function attachPressedFeedback(selector) {
       el.classList.remove("is-pressed");
     };
 
-    // Touch (mobile)
+    // TOUCH (Android / iOS reali)
     el.addEventListener(
       "touchstart",
       () => {
+        lastTouchTime = Date.now();
         addPressed();
       },
       { passive: true }
     );
+
     el.addEventListener("touchend", removePressed);
     el.addEventListener("touchcancel", removePressed);
 
-    // Mouse (desktop)
-    el.addEventListener("mousedown", addPressed);
+    // MOUSE (desktop / eventuale mouse su tablet)
+    el.addEventListener("mousedown", () => {
+      addPressed();
+    });
+
     el.addEventListener("mouseup", removePressed);
     el.addEventListener("mouseleave", removePressed);
+    el.addEventListener("blur", removePressed);
+
+    // CLICK DI RISERVA:
+    // se per qualche motivo touchstart/mousedown non partono,
+    // almeno il click attiva l'effetto.
+    el.addEventListener("click", () => {
+      const now = Date.now();
+
+      // se il click arriva subito dopo un touch, è il "finto" click di Android:
+      // in quel caso lo ignoriamo per evitare doppio effetto.
+      if (now - lastTouchTime < TOUCH_DELAY) return;
+
+      addPressed();
+      setTimeout(removePressed, 200);
+    });
   });
 }
 
-// Applico l'effetto "pressed" a tutti i click importanti
+// Applico l'effetto "pressed" a TUTTI i click importanti
 attachPressedFeedback(
   ".footer-social-icons a, " +
-  "#back-to-top, " +
-  ".btn, " +                 // tutti i bottoni (Richiedi preventivo, Invia richiesta, ecc.)
-  ".nav-links a, " +         // link della navbar
-  ".whatsapp-float, " +      // bottone WhatsApp flottante
-  ".reviews-arrow, " +       // frecce del carosello
-  ".reviews-dot"             // pallini del carosello
+    "#back-to-top, " +
+    ".btn, " +                 // tutti i bottoni (Richiedi preventivo, Invia richiesta, cookie ecc.)
+    ".nav-links a, " +         // link della navbar
+    ".whatsapp-float, " +      // bottone WhatsApp flottante
+    ".reviews-arrow, " +       // frecce del carosello
+    ".reviews-dot"             // pallini del carosello
 );
+
 // Effetto anche su link contatti e link legali nel footer
 attachPressedFeedback(".contact-list a, .footer-legal a");
+
 
 
