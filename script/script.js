@@ -515,5 +515,7 @@ attachPressedFeedback(
   ".reviews-arrow, " +       // frecce del carosello
   ".reviews-dot"             // pallini del carosello
 );
+// Effetto anche su link contatti e link legali nel footer
+attachPressedFeedback(".contact-list a, .footer-legal a");
 
 

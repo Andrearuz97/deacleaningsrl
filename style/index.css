@@ -1326,7 +1326,9 @@ button,
 .whatsapp-float.is-pressed,
 .reviews-arrow.is-pressed,
 .reviews-dot.is-pressed,
-.back-to-top.is-pressed {
+.back-to-top.is-pressed,
+.contact-list a.is-pressed,
+.footer-legal a.is-pressed {
   opacity: 0.7;
   transform: translateY(-2px);
 }
@@ -1337,6 +1339,7 @@ button,
   color: var(--bg);
   box-shadow: 0 12px 32px rgba(212, 175, 55, 0.6);
 }
+
 
 /* 💻 Hover "figo" SOLO su desktop (mouse) per nav, bottoni, card, step, WA */
 @media (hover: hover) and (pointer: fine) {
