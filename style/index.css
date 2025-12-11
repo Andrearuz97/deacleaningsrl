@@ -1307,31 +1307,13 @@ button,
 .reviews-dot::-moz-focus-inner {
   border: 0 !important;
 }
-/* Stato "premuto" generico gestito via JS (desktop + mobile) */
-.logo.is-pressed,
-.nav-links a.is-pressed,
-.contact-list a.is-pressed,
-.btn.is-pressed,
-.footer-social-icons a.is-pressed,
-.reviews-arrow.is-pressed {
+/* Stato "premuto" gestito via JS per mobile + desktop */
+.footer-social-icons a.is-pressed {
   opacity: 0.7;
   transform: translateY(-2px);
 }
 
-/* Pallini del carosello premuti: li facciamo solo un filo più piccoli */
-.reviews-dot.is-pressed {
-  transform: scale(0.9);
-  opacity: 0.8;
-}
-
-/* WhatsApp flottante premuto (tap/click) */
-.whatsapp-float.is-pressed {
-  transform: scale(0.96);
-  box-shadow: 0 8px 24px rgba(212, 175, 55, 0.45);
-  opacity: 0.9;
-}
-
-/* Freccia torna su premuta (JS) – la teniamo bella strong */
+/* Freccia torna su premuta (JS) */
 .back-to-top.is-pressed {
   background: linear-gradient(135deg, var(--primary-dark), var(--primary));
   color: var(--bg);

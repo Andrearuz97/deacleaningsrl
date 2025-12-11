@@ -505,70 +505,8 @@ function attachPressedFeedback(selector) {
   });
 }
 
-// ===========================
-// FEEDBACK VISIVO CLICK (TUTTI I TAP PRINCIPALI) - ANDROID FRIENDLY
-// ===========================
-function attachPressedFeedback(selector) {
-  const elements = document.querySelectorAll(selector);
-  if (!elements.length) return;
-
-  elements.forEach((el) => {
-    let pressedTimeout = null;
-
-    const addPressed = () => {
-      // se per qualche motivo era rimasta, la tolgo prima
-      el.classList.remove("is-pressed");
-      // aggiungo lo stato premuto
-      el.classList.add("is-pressed");
-
-      // sicurezza: la rimuovo comunque dopo 300ms
-      if (pressedTimeout) clearTimeout(pressedTimeout);
-      pressedTimeout = setTimeout(() => {
-        el.classList.remove("is-pressed");
-      }, 300);
-    };
-
-    const removePressed = () => {
-      if (pressedTimeout) clearTimeout(pressedTimeout);
-      el.classList.remove("is-pressed");
-    };
-
-    // Touch (mobile)
-    el.addEventListener(
-      "touchstart",
-      () => {
-        addPressed();
-      },
-      { passive: true }
-    );
-    el.addEventListener("touchend", removePressed);
-    el.addEventListener("touchcancel", removePressed);
-
-    // Mouse (desktop)
-    el.addEventListener("mousedown", addPressed);
-    el.addEventListener("mouseup", removePressed);
-    el.addEventListener("mouseleave", removePressed);
-  });
-}
-
-// FEEDBACK CLICK / TAP PER TUTTI GLI ELEMENTI CLICCABILI
-attachPressedFeedback(".footer-social-icons a");  // social footer
-attachPressedFeedback("#back-to-top");            // freccia torna su
-attachPressedFeedback(".whatsapp-float");         // WhatsApp flottante
-
-// NAVBAR + LOGO
-attachPressedFeedback(".nav-links a");            // link menu
-attachPressedFeedback(".logo");                   // logo cliccabile
-
-// BOTTONI GENERICI
-attachPressedFeedback(".btn");                    // tutti i bottoni (hero, form, ecc.)
-
-// CONTATTI
-attachPressedFeedback(".contact-list a");         // tel, mail, maps
-
-// CAROSELLO RECENSIONI
-attachPressedFeedback(".reviews-arrow");          // frecce sx/dx
-attachPressedFeedback(".reviews-dot");            // pallini sotto
-
+// Applico l'effetto a social e freccia torna su
+attachPressedFeedback(".footer-social-icons a");
+attachPressedFeedback("#back-to-top");
 
 
