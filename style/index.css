@@ -51,7 +51,6 @@ body {
 
 /* NIENTE SCROLL QUANDO IL MENU MOBILE È APERTO */
 @media (max-width: 850px) {
-
   html.nav-open,
   body.nav-open {
     overflow: hidden;
@@ -118,9 +117,11 @@ body {
   left: 0;
   right: 0;
   z-index: 1000;
-  background: linear-gradient(to bottom,
-      rgba(20, 20, 22, 0.92),
-      rgba(5, 6, 8, 0.88));
+  background: linear-gradient(
+    to bottom,
+    rgba(20, 20, 22, 0.92),
+    rgba(5, 6, 8, 0.88)
+  );
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(212, 175, 55, 0.25);
 }
@@ -369,7 +370,10 @@ body {
   font-weight: 500;
   cursor: pointer;
   text-decoration: none;
-  transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease,
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.15s ease,
     box-shadow 0.15s ease;
 }
 
@@ -407,7 +411,9 @@ body {
   border-radius: var(--radius-md);
   padding: 22px 20px;
   box-shadow: var(--shadow-light);
-  transition: transform 0.15s ease, box-shadow 0.15s ease,
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
     border-color 0.15s ease;
   border: 1px solid rgba(212, 175, 55, 0.08);
 }
@@ -624,7 +630,9 @@ body {
   font-size: 0.95rem;
   font-family: inherit;
   outline: none;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease,
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
     background-color 0.15s ease;
   background-color: #050608;
   color: var(--text);
@@ -756,7 +764,10 @@ body {
   font-size: 28px;
   box-shadow: 0 10px 30px rgba(212, 175, 55, 0.35);
   z-index: 999;
-  transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    opacity 0.25s ease;
   line-height: 0 !important;
   text-decoration: none;
 }
@@ -869,7 +880,10 @@ body {
     max-height: 0;
     overflow: hidden;
     transform: translateY(-8px);
-    transition: opacity 0.2s ease, transform 0.2s ease, max-height 0.25s ease;
+    transition:
+      opacity 0.2s ease,
+      transform 0.2s ease,
+      max-height 0.25s ease;
   }
 
   .nav-links.show {
@@ -880,7 +894,7 @@ body {
     transform: translateY(0);
   }
 
-  .nav-links>li>a:not(.lang-option) {
+  .nav-links > li > a:not(.lang-option) {
     display: block;
     width: 100%;
     padding: 10px 0;
@@ -953,7 +967,9 @@ body {
 [data-animate] {
   opacity: 0;
   transform: translateY(14px);
-  transition: opacity 0.55s ease-out, transform 0.55s ease-out;
+  transition:
+    opacity 0.55s ease-out,
+    transform 0.55s ease-out;
 }
 
 [data-animate].is-visible {
@@ -994,8 +1010,11 @@ body {
   padding: 22px 20px;
   box-shadow: var(--shadow-light);
   border: 1px solid rgba(212, 175, 55, 0.12);
-  transition: transform 0.15s ease, box-shadow 0.15s ease,
-    border-color 0.15s ease, background 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    border-color 0.15s ease,
+    background 0.15s ease;
 }
 
 .process-icon {
@@ -1075,31 +1094,6 @@ body {
   transform: translateY(0);
 }
 
-/* 💻 Hover “figo” SOLO su desktop (mouse vero) */
-@media (hover: hover) and (pointer: fine) {
-  .back-to-top:hover {
-    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
-    color: var(--bg);
-    box-shadow: 0 12px 32px rgba(212, 175, 55, 0.6);
-    transform: translateY(-2px);
-  }
-}
-
-/* 🖐 Effetto click SEMPRE (desktop + mobile) */
-.back-to-top:active {
-  background: linear-gradient(135deg, var(--primary-dark), var(--primary));
-  color: var(--bg);
-  box-shadow: 0 12px 32px rgba(212, 175, 55, 0.6);
-  transform: translateY(-1px);
-}
-
-@media (max-width: 720px) {
-  .back-to-top {
-    right: 18px;
-    bottom: 88px;
-  }
-}
-
 /* RECENSIONI - CAROSELLO */
 .reviews-carousel {
   position: relative;
@@ -1159,7 +1153,9 @@ body {
   justify-content: center;
   cursor: pointer;
   backdrop-filter: blur(4px);
-  transition: background 0.2s ease, transform 0.2s ease,
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
     box-shadow 0.2s ease;
   z-index: 2;
 }
@@ -1200,7 +1196,10 @@ body {
   background: var(--muted, #ccc);
   cursor: pointer;
   padding: 0;
-  transition: background 0.2s ease, transform 0.2s ease, width 0.2s ease;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    width 0.2s ease;
 }
 
 .reviews-dot.active {
@@ -1269,54 +1268,6 @@ button,
   border: 0 !important;
 }
 
-/* 🔥 HOVER SOLO DESKTOP per nav, bottoni, card, step */
-@media (hover: hover) and (pointer: fine) {
-  .nav-links a:hover {
-    color: var(--primary);
-    transform: translateY(-1px);
-  }
-
-  .btn-primary:hover {
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-soft);
-  }
-
-  .btn-outline:hover {
-    background: rgba(212, 175, 55, 0.08);
-  }
-
-  .card:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-soft);
-    border-color: rgba(212, 175, 55, 0.25);
-  }
-
-  .process-step:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-soft);
-    border-color: rgba(212, 175, 55, 0.25);
-    background: #14151d;
-  }
-}
-
-/* Stato "premuto" gestito via JS per mobile + desktop */
-.footer-social-icons a.is-pressed,
-.nav-links a.is-pressed,
-.btn.is-pressed,
-.whatsapp-float.is-pressed,
-.reviews-arrow.is-pressed,
-.reviews-dot.is-pressed,
-.back-to-top.is-pressed {
-  opacity: 0.8;
-  transform: translateY(-1px);
-}
-
-/* stile extra solo per back-to-top quando premuto */
-.back-to-top.is-pressed {
-  background: linear-gradient(135deg, var(--primary-dark), var(--primary));
-  color: var(--bg);
-  box-shadow: 0 12px 32px rgba(212, 175, 55, 0.6);
-}
 /* === EFFETTO "PREMUTO" UGUALE A FRECCIA + SOCIAL PER TUTTI === */
 
 /* Stato premuto per TUTTI gli elementi interattivi */
@@ -1339,7 +1290,6 @@ button,
   color: var(--bg);
   box-shadow: 0 12px 32px rgba(212, 175, 55, 0.6);
 }
-
 
 /* 💻 Hover "figo" SOLO su desktop (mouse) per nav, bottoni, card, step, WA */
 @media (hover: hover) and (pointer: fine) {
@@ -1383,48 +1333,55 @@ button,
   .footer-legal a:hover {
     opacity: 1;
   }
+
+  .back-to-top:hover {
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+    color: var(--bg);
+    box-shadow: 0 12px 32px rgba(212, 175, 55, 0.6);
+    transform: translateY(-2px);
+  }
 }
 
-/* 📱 Su dispositivi touch: neutralizziamo gli hover (come per i social) */
+/* 📱 Su dispositivi touch: neutralizziamo gli hover MA NON lo stato premuto */
 @media (hover: none), (pointer: coarse) {
-  .nav-links a:hover {
+  .nav-links a:hover:not(.is-pressed) {
     color: var(--muted);
     transform: none;
   }
 
-  .btn-primary:hover {
+  .btn-primary:hover:not(.is-pressed) {
     transform: none;
     box-shadow: var(--shadow-light);
   }
 
-  .btn-outline:hover {
+  .btn-outline:hover:not(.is-pressed) {
     background: transparent;
   }
 
-  .card:hover {
+  .card:hover:not(.is-pressed) {
     transform: none;
     box-shadow: var(--shadow-light);
     border-color: rgba(212, 175, 55, 0.08);
   }
 
-  .process-step:hover {
+  .process-step:hover:not(.is-pressed) {
     transform: none;
     box-shadow: var(--shadow-light);
     border-color: rgba(212, 175, 55, 0.12);
     background: var(--surface);
   }
 
-  .whatsapp-float:hover {
+  .whatsapp-float:hover:not(.is-pressed) {
     transform: none;
     box-shadow: 0 10px 30px rgba(212, 175, 55, 0.35);
     opacity: 1;
   }
 
-  .contact-list a:hover {
+  .contact-list a:hover:not(.is-pressed) {
     color: var(--text);
   }
 
-  .footer-legal a:hover {
+  .footer-legal a:hover:not(.is-pressed) {
     opacity: 0.8;
   }
 }
