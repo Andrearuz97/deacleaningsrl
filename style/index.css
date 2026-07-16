@@ -762,11 +762,11 @@ body {
   margin-top: 8px;
   font-size: 0.85rem;
   text-align: center;
-  opacity: 0.8;
 }
 
 .footer-legal a {
   color: #ffffff;
+  opacity: 0.8;
   text-decoration: none;
   transition: opacity 0.2s;
 }
@@ -1446,6 +1446,11 @@ button,
   }
 
   .footer-legal a:hover:not(.is-pressed) {
+    opacity: 0.8;
+  }
+
+  .footer-legal a:focus:not(:focus-visible),
+  .footer-legal a:active:not(.is-pressed) {
     opacity: 0.8;
   }
 
