@@ -566,11 +566,19 @@ attachPressedFeedback(
 );
 
 // Effetto anche su link contatti e link legali nel footer
-attachPressedFeedback(".contact-list a, .footer-legal a");
+attachPressedFeedback(".contact-list a, .footer-legal a, .footer-signature a");
 
-// ⬅️ SICUREZZA EXTRA: se la pagina sta scrollando, togliamo qualsiasi "pressed"
-window.addEventListener("scroll", () => {
+// Sicurezza extra: nessun link resta visivamente premuto dopo tap, scroll,
+// cambio scheda o ritorno alla pagina (caso frequente sui browser mobile).
+const clearPressedFeedback = () => {
   const pressedEls = document.querySelectorAll(".is-pressed");
   if (!pressedEls.length) return;
   pressedEls.forEach((el) => el.classList.remove("is-pressed"));
-});
+};
+
+window.addEventListener("scroll", clearPressedFeedback, { passive: true });
+window.addEventListener("pageshow", clearPressedFeedback);
+window.addEventListener("blur", clearPressedFeedback);
+document.addEventListener("visibilitychange", clearPressedFeedback);
+document.addEventListener("pointerup", clearPressedFeedback);
+document.addEventListener("pointercancel", clearPressedFeedback);

@@ -572,6 +572,33 @@ body {
   margin-bottom: 16px;
 }
 
+.contact-whatsapp {
+  display: inline-flex;
+  margin-bottom: 18px;
+}
+
+.review-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.review-cta h2 {
+  font-size: 1.55rem;
+  margin-bottom: 6px;
+}
+
+.review-cta p {
+  color: var(--muted);
+}
+
+.review-cta > .btn {
+  flex: 0 0 auto;
+}
+
 .contact-list {
   list-style: none;
   padding: 0;
@@ -812,6 +839,11 @@ body {
 }
 
 @media (max-width: 720px) {
+  .review-cta {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
   .whatsapp-float {
     width: 54px;
     height: 54px;
@@ -1311,6 +1343,11 @@ button,
   transform: translateY(-2px);
 }
 
+.footer-signature a.is-pressed {
+  color: var(--accent);
+  opacity: 0.7;
+}
+
 /* Stile extra solo per back-to-top (come già usavi) */
 .back-to-top.is-pressed {
   background: linear-gradient(135deg, var(--primary-dark), var(--primary));
@@ -1410,6 +1447,11 @@ button,
 
   .footer-legal a:hover:not(.is-pressed) {
     opacity: 0.8;
+  }
+
+  .footer-signature a:hover:not(.is-pressed),
+  .footer-signature a:focus:not(:focus-visible) {
+    color: rgba(212, 175, 55, 0.78);
   }
 }
 /* =========================

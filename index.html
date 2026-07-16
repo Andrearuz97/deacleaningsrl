@@ -101,7 +101,7 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "LocalBusiness",
+        "@type": ["LocalBusiness", "CleaningService"],
         "@id": "https://www.deacleaningsrls.it/#localbusiness",
         "name": "Dea Cleaning Srls",
         "url": "https://www.deacleaningsrls.it/",
@@ -231,10 +231,15 @@
           </p>
 
           <div class="hero-actions">
-            <a href="#contatti" class="btn btn-primary">
-              Richiedi un preventivo gratuito
+            <a
+              href="https://wa.me/393463238078?text=Buongiorno%2C%20vorrei%20ricevere%20informazioni%20su%20un%20servizio%20di%20pulizia."
+              class="btn btn-primary"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Scrivici su WhatsApp
             </a>
-            <a href="#servizi" class="btn btn-outline">Vedi tutti i servizi</a>
+            <a href="#contact-form" class="btn btn-outline">Richiedi un preventivo</a>
           </div>
 
           <div class="hero-badges">
@@ -655,6 +660,14 @@
             Scrivici per richiedere un sopralluogo o un preventivo gratuito. Ti
             ricontatteremo al più presto.
           </p>
+          <a
+            href="https://wa.me/393463238078?text=Buongiorno%2C%20vorrei%20ricevere%20informazioni%20su%20un%20servizio%20di%20pulizia."
+            class="btn btn-primary contact-whatsapp"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Contattaci su WhatsApp
+          </a>
           <ul class="contact-list">
             <li>
               <i class="fa-solid fa-phone"></i>
@@ -668,13 +681,7 @@
             </li>
             <li>
               <i class="fa-solid fa-location-dot"></i>
-              <a
-                href="https://www.google.com/maps?q=Via+Pinturicchio+6,+Loiri+Porto+San+Paolo"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Via Pinturicchio 6, Loiri Porto San Paolo (SS)
-              </a>
+              <span>Via Pinturicchio 6, Loiri Porto San Paolo (SS)</span>
             </li>
             <li>
               <i class="fa-brands fa-google"></i>
@@ -793,6 +800,24 @@
       </div>
     </section>
 
+    <!-- RECENSIONE GOOGLE -->
+    <section class="section section-alt review-cta-section" aria-labelledby="review-cta-title">
+      <div class="container review-cta" data-animate="fade-up">
+        <div>
+          <h2 id="review-cta-title">Hai già scelto Dea Cleaning?</h2>
+          <p>Racconta la tua esperienza e aiutaci a far conoscere il nostro servizio.</p>
+        </div>
+        <a
+          href="https://share.google/dIQRijv8F1feUZNyT"
+          class="btn btn-outline"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Lascia una recensione su Google
+        </a>
+      </div>
+    </section>
+
     <!-- MAPPA -->
     <section class="section">
       <div class="container" data-animate="fade-up">
@@ -829,7 +854,7 @@
           <p class="footer-social-title">Restiamo in contatto</p>
           <div class="footer-social-icons">
             <a
-              href="https://wa.me/393463238078"
+              href="https://wa.me/393463238078?text=Buongiorno%2C%20vorrei%20ricevere%20informazioni%20su%20un%20servizio%20di%20pulizia."
               target="_blank"
               rel="noopener noreferrer"
               aria-label="WhatsApp"
@@ -889,11 +914,11 @@
 
     <!-- Pulsante WhatsApp flottante -->
     <a
-      href="https://wa.me/393463238078"
+      href="https://wa.me/393463238078?text=Buongiorno%2C%20vorrei%20ricevere%20informazioni%20su%20un%20servizio%20di%20pulizia."
       class="whatsapp-float"
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="WhatsApp"
+      aria-label="Scrivi a Dea Cleaning su WhatsApp"
     >
       <i class="fa-brands fa-whatsapp"></i>
     </a>
