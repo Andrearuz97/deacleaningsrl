@@ -764,14 +764,26 @@ body {
   text-align: center;
 }
 
-.footer-legal a {
+.footer-legal a,
+.footer-legal .cookie-manage {
   color: #ffffff;
   opacity: 0.8;
   text-decoration: none;
   transition: opacity 0.2s;
 }
 
-.footer-legal a:hover {
+.footer-legal .cookie-manage {
+  appearance: none;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  cursor: pointer;
+}
+
+.footer-legal a:hover,
+.footer-legal .cookie-manage:hover,
+.footer-legal .cookie-manage:focus-visible {
   opacity: 1;
 }
 
@@ -1338,7 +1350,8 @@ button,
 .reviews-dot.is-pressed,
 .back-to-top.is-pressed,
 .contact-list a.is-pressed,
-.footer-legal a.is-pressed {
+.footer-legal a.is-pressed,
+.footer-legal .cookie-manage.is-pressed {
   opacity: 0.7;
   transform: translateY(-2px);
 }
@@ -1394,7 +1407,8 @@ button,
     color: var(--primary);
   }
 
-  .footer-legal a:hover {
+  .footer-legal a:hover,
+  .footer-legal .cookie-manage:hover {
     opacity: 1;
   }
 
@@ -1445,12 +1459,15 @@ button,
     color: var(--text);
   }
 
-  .footer-legal a:hover:not(.is-pressed) {
+  .footer-legal a:hover:not(.is-pressed),
+  .footer-legal .cookie-manage:hover:not(.is-pressed) {
     opacity: 0.8;
   }
 
   .footer-legal a:focus:not(:focus-visible),
-  .footer-legal a:active:not(.is-pressed) {
+  .footer-legal a:active:not(.is-pressed),
+  .footer-legal .cookie-manage:focus:not(:focus-visible),
+  .footer-legal .cookie-manage:active:not(.is-pressed) {
     opacity: 0.8;
   }
 

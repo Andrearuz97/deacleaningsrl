@@ -191,6 +191,7 @@ if (backToTop) {
 // ===========================
 const cookieBanner = document.getElementById("cookie-banner");
 const cookieAccept = document.getElementById("cookie-accept");
+const cookieManageButtons = document.querySelectorAll("[data-cookie-manage]");
 
 if (cookieBanner && cookieAccept) {
   const COOKIES_KEY = "dea_cleaning_cookies_accepted";
@@ -202,6 +203,14 @@ if (cookieBanner && cookieAccept) {
   cookieAccept.addEventListener("click", () => {
     localStorage.setItem(COOKIES_KEY, "true");
     cookieBanner.style.display = "none";
+  });
+
+  cookieManageButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      cookieBanner.style.removeProperty("display");
+      cookieBanner.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      cookieAccept.focus({ preventScroll: true });
+    });
   });
 }
 
@@ -566,7 +575,9 @@ attachPressedFeedback(
 );
 
 // Effetto anche su link contatti e link legali nel footer
-attachPressedFeedback(".contact-list a, .footer-legal a, .footer-signature a");
+attachPressedFeedback(
+  ".contact-list a, .footer-legal a, .footer-legal button, .footer-signature a"
+);
 
 // Sicurezza extra: nessun link resta visivamente premuto dopo tap, scroll,
 // cambio scheda o ritorno alla pagina (caso frequente sui browser mobile).
