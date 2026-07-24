@@ -190,27 +190,96 @@ if (backToTop) {
 // COOKIE BANNER
 // ===========================
 const cookieBanner = document.getElementById("cookie-banner");
-const cookieAccept = document.getElementById("cookie-accept");
+const cookieAccept = document.querySelector("[data-cookie-accept]");
+const cookieNecessary = document.querySelector("[data-cookie-necessary]");
 const cookieManageButtons = document.querySelectorAll("[data-cookie-manage]");
+const mapFrames = document.querySelectorAll("iframe[data-src]");
+const mapAcceptButtons = document.querySelectorAll("[data-map-accept]");
 
-if (cookieBanner && cookieAccept) {
-  const COOKIES_KEY = "dea_cleaning_cookies_accepted";
+const COOKIES_KEY = "dea_cleaning_cookie_preference";
 
-  if (localStorage.getItem(COOKIES_KEY) === "true") {
-    cookieBanner.style.display = "none";
-  }
-
-  cookieAccept.addEventListener("click", () => {
-    localStorage.setItem(COOKIES_KEY, "true");
-    cookieBanner.style.display = "none";
+function loadConsentMaps() {
+  mapFrames.forEach((frame) => {
+    if (!frame.src) frame.src = frame.dataset.src;
+    frame.hidden = false;
+    const panel = frame.parentElement.querySelector("[data-map-consent]");
+    if (panel) panel.hidden = true;
   });
+}
+
+function blockConsentMaps() {
+  mapFrames.forEach((frame) => {
+    frame.removeAttribute("src");
+    frame.hidden = true;
+    const panel = frame.parentElement.querySelector("[data-map-consent]");
+    if (panel) panel.hidden = false;
+  });
+}
+
+function saveCookiePreference(preference) {
+  localStorage.setItem(COOKIES_KEY, preference);
+  if (cookieBanner) cookieBanner.hidden = true;
+  if (preference === "maps_accepted") loadConsentMaps();
+  else blockConsentMaps();
+}
+
+const savedCookiePreference = localStorage.getItem(COOKIES_KEY);
+if (savedCookiePreference === "maps_accepted") loadConsentMaps();
+if (cookieBanner && savedCookiePreference) cookieBanner.hidden = true;
+
+if (cookieBanner && cookieAccept && cookieNecessary) {
+  cookieAccept.addEventListener("click", () => {
+    saveCookiePreference("maps_accepted");
+  });
+
+  cookieNecessary.addEventListener("click", () => saveCookiePreference("necessary_only"));
 
   cookieManageButtons.forEach((button) => {
     button.addEventListener("click", () => {
-      cookieBanner.style.removeProperty("display");
+      localStorage.removeItem(COOKIES_KEY);
+      blockConsentMaps();
+      cookieBanner.hidden = false;
       cookieBanner.scrollIntoView({ behavior: "smooth", block: "nearest" });
       cookieAccept.focus({ preventScroll: true });
     });
+  });
+}
+
+mapAcceptButtons.forEach((button) => {
+  button.addEventListener("click", () => saveCookiePreference("maps_accepted"));
+});
+
+// Invio del form con esito esplicito e campi conservati in caso di errore.
+const contactForm = document.getElementById("contact-form");
+const formMessage = document.getElementById("form-message");
+if (contactForm && formMessage) {
+  contactForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const submitButton = contactForm.querySelector('[type="submit"]');
+    const nextPage = contactForm.querySelector('[name="_next"]')?.value;
+    formMessage.className = "form-message";
+    formMessage.textContent = document.documentElement.lang === "en" ? "Sending…" : "Invio in corso…";
+    if (submitButton) submitButton.disabled = true;
+
+    try {
+      const recipient = contactForm.action.split("/").pop();
+      const response = await fetch(`https://formsubmit.co/ajax/${recipient}`, {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: new FormData(contactForm),
+      });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      formMessage.classList.add("success");
+      formMessage.textContent = document.documentElement.lang === "en" ? "Request sent successfully." : "Richiesta inviata correttamente.";
+      if (nextPage) window.location.assign(nextPage);
+    } catch (error) {
+      formMessage.classList.add("error");
+      formMessage.textContent = document.documentElement.lang === "en"
+        ? "The request could not be sent. Your entries have been kept: please try again."
+        : "Non è stato possibile inviare la richiesta. I dati inseriti sono stati conservati: riprova.";
+      console.error("Contact form submission failed:", error);
+      if (submitButton) submitButton.disabled = false;
+    }
   });
 }
 

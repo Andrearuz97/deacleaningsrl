@@ -102,13 +102,15 @@
 
       <h3>2. Third-party cookies</h3>
       <p>
-        This website uses external services that may install technical
-        cookies:
+        This website makes external services available only according to the user’s choice:
       </p>
 
       <p>
         <strong>• Google Maps (Google Ireland Ltd.)</strong><br />
-        Used to display the company location in the “Where we are” section.<br />
+        Used to display the company location in the “Where we are” section.
+        The map is blocked initially: its URL remains in the <code>data-src</code>
+        attribute and is assigned to the iframe only after explicit consent. Choosing
+        “Necessary only” makes no request to Google Maps.<br />
         Privacy policy:
         <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">
           https://policies.google.com/privacy
@@ -127,16 +129,14 @@
 
       <h2>Managing cookies</h2>
       <p>
-        You can manage or disable cookies directly through your browser
-        settings. Disabling technical cookies may cause certain functions of
-        the website to malfunction.
+        The preference is saved in the browser’s <code>localStorage</code>. The
+        “Manage cookies” command in the footer deletes it and displays the choice again.
       </p>
 
       <h2>Cookie banner</h2>
       <p>
-        When accessing the site for the first time, an informational banner
-        appears stating that only technical cookies and third-party services
-        may be used.
+        On the first visit, the site lets users choose between “Necessary only”
+        and consent to Google Maps. Continuing to browse does not constitute consent.
       </p>
 
       <h2>Data Controller</h2>
@@ -148,7 +148,7 @@
       </p>
 
       <p style="margin-top: 26px; color: var(--muted); font-size: 0.85rem">
-        Last update: November 2025
+        Last update: 24 July 2026
       </p>
     </div>
   </section>
@@ -208,10 +208,11 @@
   <!-- COOKIE BANNER EN -->
   <div class="cookie-banner" id="cookie-banner">
     <p>
-      This site uses only technical cookies and possibly third-party services.
-      By continuing to browse, you accept the use of cookies.
+      Google Maps is loaded only with your consent. You can continue using only
+      necessary features.
     </p>
-    <button type="button" class="btn cookie-btn" id="cookie-accept">Got it</button>
+    <button type="button" class="btn btn-outline cookie-btn" data-cookie-necessary>Necessary only</button>
+    <button type="button" class="btn cookie-btn" data-cookie-accept>Accept Google Maps</button>
   </div>
 
   <script src="./script/script.js" defer></script>

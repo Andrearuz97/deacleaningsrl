@@ -70,7 +70,7 @@
     <div class="container">
       <h1 style="margin-bottom: 20px">Privacy Policy</h1>
 
-      <p>Last update: November 2025</p>
+      <p>Last update: 24 July 2026</p>
       <br />
 
       <p>
@@ -91,8 +91,8 @@
       <p>
         • Data sent through the contact form: name, email, phone, message<br />
         • Technical data collected automatically (IP, browser type, logs)<br />
-        • Data collected by third-party services such as Google Maps,
-        WhatsApp, FormSubmit
+        • Data sent to Google Maps only after the user’s explicit consent;
+        data sent to WhatsApp or FormSubmit when the user uses those services
       </p>
 
       <h2>3. Purpose of data processing</h2>
@@ -124,8 +124,11 @@
 
       <h2>7. Data sharing</h2>
       <p>
-        Data may be shared with Google (Maps), FormSubmit (contact form), and
-        technical providers.
+        Contact-form data may be shared with FormSubmit and technical providers.
+        Google Maps receives data only if the user explicitly chooses to load the map;
+        before consent, the iframe has no loading address and makes no request to Google.
+        The choice is stored in the browser’s <code>localStorage</code> and can be deleted
+        through the “Manage cookies” command in the footer.
       </p>
 
       <h2>8. User rights (GDPR)</h2>
@@ -194,10 +197,11 @@
   <!-- COOKIE BANNER -->
   <div class="cookie-banner" id="cookie-banner">
     <p>
-      This site uses only technical cookies and possibly third-party services.
-      By continuing to browse, you accept the use of cookies.
+      Google Maps is loaded only with your consent. You can continue using only
+      necessary features.
     </p>
-    <button type="button" class="btn cookie-btn" id="cookie-accept">Got it</button>
+    <button type="button" class="btn btn-outline cookie-btn" data-cookie-necessary>Necessary only</button>
+    <button type="button" class="btn cookie-btn" data-cookie-accept>Accept Google Maps</button>
   </div>
   <script src="./script/script.js" defer></script>
 </body>

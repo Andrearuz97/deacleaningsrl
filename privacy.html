@@ -70,7 +70,7 @@
     <div class="container">
       <h1 style="margin-bottom: 20px">Privacy Policy</h1>
 
-      <p>Ultimo aggiornamento: Novembre 2025</p>
+      <p>Ultimo aggiornamento: 24 luglio 2026</p>
       <br />
 
       <p>
@@ -93,8 +93,8 @@
         • Dati inviati tramite il form di contatto: nome, email, telefono,
         messaggio<br />
         • Dati tecnici raccolti automaticamente (IP, browser, log)<br />
-        • Dati raccolti da servizi di terze parti come Google Maps, WhatsApp e
-        FormSubmit
+        • Dati trasmessi a Google Maps soltanto dopo il consenso esplicito
+        dell’utente; dati trasmessi a WhatsApp o FormSubmit quando l’utente usa i relativi servizi
       </p>
 
       <h2>3. Finalità del trattamento</h2>
@@ -126,8 +126,11 @@
 
       <h2>7. Condivisione dei dati</h2>
       <p>
-        I dati possono essere condivisi con: Google (Maps), FormSubmit (form
-        contatti), fornitori tecnici.
+        I dati del modulo possono essere condivisi con FormSubmit e con i fornitori tecnici.
+        Google Maps riceve dati soltanto se l’utente sceglie esplicitamente di caricare la mappa;
+        prima del consenso l’iframe non ha un indirizzo di caricamento e non effettua richieste a Google.
+        La scelta viene memorizzata nel <code>localStorage</code> del browser e può essere cancellata
+        tramite il comando “Gestisci cookie” nel footer.
       </p>
 
       <h2>8. Diritti dell’utente</h2>
@@ -201,10 +204,11 @@
   <!-- COOKIE BANNER IT -->
   <div class="cookie-banner" id="cookie-banner">
     <p>
-      Questo sito utilizza solo cookie tecnici ed eventualmente servizi di
-      terze parti. Proseguendo la navigazione accetti l’uso dei cookie.
+      Google Maps viene caricato soltanto con il tuo consenso. Puoi continuare
+      usando solo le funzioni necessarie.
     </p>
-    <button type="button" class="btn cookie-btn" id="cookie-accept">Ho capito</button>
+    <button type="button" class="btn btn-outline cookie-btn" data-cookie-necessary>Solo necessari</button>
+    <button type="button" class="btn cookie-btn" data-cookie-accept>Accetta Google Maps</button>
   </div>
 
   <script src="./script/script.js" defer></script>

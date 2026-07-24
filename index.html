@@ -690,8 +690,9 @@
 
           <p class="form-note">
             I tuoi dati verranno utilizzati solo per rispondere alla tua
-            richiesta di contatto.
+            richiesta di contatto. Consulta la <a href="./privacy.html">Privacy Policy</a>.
           </p>
+          <p class="form-message" id="form-message" role="status" aria-live="polite"></p>
         </form>
       </div>
     </div>
@@ -726,9 +727,13 @@
             overflow: hidden;
             box-shadow: 0 14px 30px rgba(0, 0, 0, 0.5);
           ">
-        <iframe src="https://www.google.com/maps?q=Via+Pinturicchio+6,+Loiri+Porto+San+Paolo&amp;output=embed"
+        <div class="map-consent" data-map-consent>
+          <p>Carica la mappa</p>
+          <button type="button" class="btn btn-primary" data-map-accept>Accetta e carica Google Maps</button>
+        </div>
+        <iframe data-src="https://www.google.com/maps?q=Via+Pinturicchio+6,+Loiri+Porto+San+Paolo&amp;output=embed"
           title="Mappa della sede di Dea Cleaning Srls a Loiri Porto San Paolo"
-          style="width: 100%; height: 320px; border: 0" loading="lazy"
+          style="width: 100%; height: 320px; border: 0" loading="lazy" hidden
           referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
     </div>
@@ -800,10 +805,11 @@
   <!-- COOKIE BANNER IT -->
   <div class="cookie-banner" id="cookie-banner">
     <p>
-      Questo sito utilizza solo cookie tecnici ed eventualmente servizi di
-      terze parti. Proseguendo la navigazione accetti l’uso dei cookie.
+      Google Maps viene caricato soltanto con il tuo consenso. Puoi continuare
+      usando solo le funzioni necessarie.
     </p>
-    <button type="button" class="btn cookie-btn" id="cookie-accept">Ho capito</button>
+    <button type="button" class="btn btn-outline cookie-btn" data-cookie-necessary>Solo necessari</button>
+    <button type="button" class="btn cookie-btn" data-cookie-accept>Accetta Google Maps</button>
   </div>
 
   <script src="./script/script.js" defer></script>

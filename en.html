@@ -676,8 +676,10 @@
           </button>
 
           <p class="form-note">
-            Your data will only be used to reply to your contact request.
+            Your data will only be used to reply to your contact request. See the
+            <a href="./privacy-en.html">Privacy Policy</a>.
           </p>
+          <p class="form-message" id="form-message" role="status" aria-live="polite"></p>
         </form>
       </div>
     </div>
@@ -712,9 +714,13 @@
             overflow: hidden;
             box-shadow: 0 14px 30px rgba(0, 0, 0, 0.5);
           ">
-        <iframe src="https://www.google.com/maps?q=Via+Pinturicchio+6,+Loiri+Porto+San+Paolo&amp;output=embed"
+        <div class="map-consent" data-map-consent>
+          <p>Load the map</p>
+          <button type="button" class="btn btn-primary" data-map-accept>Accept and load Google Maps</button>
+        </div>
+        <iframe data-src="https://www.google.com/maps?q=Via+Pinturicchio+6,+Loiri+Porto+San+Paolo&amp;output=embed"
           title="Map showing the registered office of Dea Cleaning Srls in Loiri Porto San Paolo"
-          style="width: 100%; height: 320px; border: 0" loading="lazy"
+          style="width: 100%; height: 320px; border: 0" loading="lazy" hidden
           referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
     </div>
@@ -782,10 +788,11 @@
   <!-- COOKIE BANNER EN -->
   <div class="cookie-banner" id="cookie-banner">
     <p>
-      This site uses only technical cookies and possibly third-party services.
-      By continuing to browse, you accept the use of cookies.
+      Google Maps is loaded only with your consent. You can continue using only
+      necessary features.
     </p>
-    <button type="button" class="btn cookie-btn" id="cookie-accept">Got it</button>
+    <button type="button" class="btn btn-outline cookie-btn" data-cookie-necessary>Necessary only</button>
+    <button type="button" class="btn cookie-btn" data-cookie-accept>Accept Google Maps</button>
   </div>
 
   <script src="./script/script.js" defer></script>

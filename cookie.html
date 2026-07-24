@@ -104,14 +104,15 @@
 
       <h3>2. Cookie di terze parti</h3>
       <p>
-        Il sito utilizza servizi esterni che possono installare cookie
-        tecnici:
+        Il sito rende disponibili servizi esterni solo secondo le scelte dell’utente:
       </p>
 
       <p>
         <strong>• Google Maps (Google Ireland Ltd.)</strong><br />
-        Utilizzato per mostrare la posizione dell’azienda nella sezione "Dove
-        siamo".<br />
+        Utilizzato per mostrare la posizione dell’azienda nella sezione "Dove siamo".
+        La mappa è inizialmente bloccata: l’URL resta nell’attributo <code>data-src</code>
+        e viene assegnato all’iframe solo dopo il consenso esplicito. Scegliendo
+        “Solo necessari” non viene effettuata alcuna richiesta a Google Maps.<br />
         Privacy policy:
         <a href="https://policies.google.com/privacy" target="_blank"
           rel="noopener noreferrer">https://policies.google.com/privacy</a>
@@ -128,15 +129,14 @@
 
       <h2>Gestione dei cookie</h2>
       <p>
-        Puoi gestire e disattivare i cookie tramite le impostazioni del tuo
-        browser. Disattivando i cookie tecnici alcune funzionalità potrebbero
-        non funzionare correttamente.
+        La preferenza è salvata nel <code>localStorage</code> del browser. Il comando
+        “Gestisci cookie” nel footer cancella la preferenza e mostra nuovamente la scelta.
       </p>
 
       <h2>Cookie banner</h2>
       <p>
-        Al primo accesso il sito mostra un banner informativo sull’utilizzo di
-        cookie tecnici e di eventuali servizi di terze parti.
+        Al primo accesso il sito permette di scegliere tra “Solo necessari” e il
+        consenso a Google Maps. La semplice prosecuzione della navigazione non vale come consenso.
       </p>
 
       <h2>Titolare del trattamento</h2>
@@ -148,7 +148,7 @@
       </p>
 
       <p style="margin-top: 26px; color: var(--muted); font-size: 0.85rem">
-        Ultimo aggiornamento: Novembre 2025
+        Ultimo aggiornamento: 24 luglio 2026
       </p>
     </div>
   </section>
@@ -211,10 +211,11 @@
   <!-- COOKIE BANNER IT -->
   <div class="cookie-banner" id="cookie-banner">
     <p>
-      This site uses only technical cookies and possibly third-party services.
-      By continuing to browse, you accept the use of cookies.
+      Google Maps viene caricato soltanto con il tuo consenso. Puoi continuare
+      usando solo le funzioni necessarie.
     </p>
-    <button type="button" class="btn cookie-btn" id="cookie-accept">Ho capito</button>
+    <button type="button" class="btn btn-outline cookie-btn" data-cookie-necessary>Solo necessari</button>
+    <button type="button" class="btn cookie-btn" data-cookie-accept>Accetta Google Maps</button>
   </div>
 
   <script src="./script/script.js" defer></script>
